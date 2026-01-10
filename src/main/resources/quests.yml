@@ -1,0 +1,5 @@
+quests:
+  daily:
+    count: 4
+    reward-exp-min: 40
+    reward-exp-max: 70

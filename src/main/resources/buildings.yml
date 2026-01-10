@@ -1,0 +1,71 @@
+buildings:
+  bank:
+    display-name: "\uC740\uD589"
+    build-time-seconds: 3600
+    structure: "structures/build/bank.nbt"
+    price: 0
+    min-level: 1
+    max-per-nation: 1
+  chest:
+    display-name: "\uCC3D\uACE0"
+    build-time-seconds: 300
+    structure: "structures/build/chest.nbt"
+    price: 0
+    min-level: 4
+    max-per-nation: 1
+  present:
+    display-name: "\uC120\uBB3C\uC0C1\uC790"
+    build-time-seconds: 5400
+    structure: "structures/build/present.nbt"
+    price: 0
+    min-level: 4
+    max-per-nation: 1
+  shop:
+    display-name: "\uC0C1\uC810"
+    build-time-seconds: 120
+    structure: "structures/build/shop.nbt"
+    price: 0
+    min-level: 1
+    max-per-nation: 1
+  restaurant:
+    display-name: "\uC8FC\uBC29"
+    build-time-seconds: 1800
+    structure: "structures/build/restaurant.nbt"
+    price: 0
+    min-level: 4
+    max-per-nation: 1
+  shelter:
+    display-name: "\uC219\uC18C"
+    build-time-seconds: 7200
+    structure: "structures/build/shelter.nbt"
+    price: 0
+    min-level: 4
+    max-per-nation: 1
+  island:
+    display-name: "\uB18D\uC7A5"
+    build-time-seconds: 3600
+    structure: "structures/build/island.nbt"
+    price: 0
+    min-level: 1
+    max-per-nation: 1
+  lab:
+    display-name: "\uC5F0\uAD6C\uC18C"
+    build-time-seconds: 10800
+    structure: "structures/build/lab.nbt"
+    price: 0
+    min-level: 4
+    max-per-nation: 1
+  fishing:
+    display-name: "\uB09A\uC2DC\uD130"
+    build-time-seconds: 5400
+    structure: "structures/build/fishing.nbt"
+    price: 0
+    min-level: 3
+    max-per-nation: 1
+  mine:
+    display-name: "\uAD11\uC0B0"
+    build-time-seconds: 16200
+    structure: "structures/build/mine.nbt"
+    price: 0
+    min-level: 2
+    max-per-nation: 1

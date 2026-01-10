@@ -1,0 +1,61 @@
+# NationSystem configuration (ASCII only)
+database:
+  type: mariadb
+  host: localhost
+  port: 3306
+  name: nationsystem
+  user: root
+  password: ""
+  pool-size: 10
+  use-ssl: false
+
+redis:
+  enabled: false
+  host: localhost
+  port: 6379
+  password: ""
+  database: 0
+
+nation:
+  name-min-length: 2
+  name-max-length: 8
+  name-regex: '^[a-zA-Z0-9_\\p{IsHangul}]+$'
+  create-cost: 0
+  invite-expire-seconds: 60
+  max-members-default: 20
+  level-up:
+    exp: [1000, 5000, 10000, 30000, 60000, 150000, 300000, 500000, 1000000]
+    money: [5000000, 10000000, 30000000, 70000000, 100000000, 500000000, 1000000000, 3000000000, 5000000000]
+  limits:
+    max-members-by-level: [20, 20, 25, 30, 35, 40, 45, 50, 55, 60]
+    max-territories-by-level: [1, 1, 2, 2, 2, 3, 3, 3, 3, 4]
+    max-knights-by-level: [0, 0, 1, 1, 1, 1, 1, 2, 2, 2]
+
+territory:
+  world: Wild
+  size: 103
+  min-distance: 300
+  xz-limit: 7000
+  y-min: 35
+  y-max: 80
+  wall-expire-minutes: 60
+  max-per-nation: 1
+
+structures:
+  wall-basic: "structures/wall/basic_wall.nbt"
+  center: "structures/build/center.nbt"
+
+building:
+  min-spacing: 21
+
+storage:
+  size: 54
+
+present:
+  cooldown-hours: 20
+  reward-money: 0
+  reward-exp: 0
+
+chat:
+  nation-chat-prefix: "&6[Nation]&r"
+  nation-chat-format: "&6[Nation]&r &7%player%: &f%message%"

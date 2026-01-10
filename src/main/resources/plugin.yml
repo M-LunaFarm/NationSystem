@@ -1,0 +1,16 @@
+name: NationSystem
+version: '1.0.0'
+main: kr.lunaf.nationSystem.NationSystem
+api-version: '1.21'
+softdepend: [Vault, Skript]
+commands:
+  nation:
+    description: Nation command
+    aliases: [ "국가" ]
+permissions:
+  nations.admin.*:
+    description: Admin permissions
+    default: op
+  nations.user.*:
+    description: User permissions
+    default: true

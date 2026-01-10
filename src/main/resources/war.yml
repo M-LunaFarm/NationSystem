@@ -1,0 +1,13 @@
+war:
+  match-open: true
+  prepare-seconds: 180
+  battle-seconds: 1800
+  match-thresholds:
+    - time-seconds: 60
+      max-level-diff: 1
+    - time-seconds: 120
+      max-level-diff: 2
+    - time-seconds: 180
+      max-level-diff: 3
+    - time-seconds: 999999
+      max-level-diff: 4
