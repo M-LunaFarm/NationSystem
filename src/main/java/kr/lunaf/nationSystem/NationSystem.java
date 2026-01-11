@@ -224,7 +224,7 @@ public final class NationSystem extends JavaPlugin {
             this
         );
         getServer().getPluginManager().registerEvents(
-            new ProclamationListener(this, messages, pluginConfig, territoryService, namePromptService, customItems, buildingsConfig),
+            new ProclamationListener(this, messages, pluginConfig, territoryService, namePromptService, customItems, buildingsConfig, nationService),
             this
         );
         getServer().getPluginManager().registerEvents(

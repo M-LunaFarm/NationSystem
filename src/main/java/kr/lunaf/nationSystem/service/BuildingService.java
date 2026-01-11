@@ -91,7 +91,14 @@ public class BuildingService {
             if (baseLocation.getBlockY() != territory.get().centerY()) {
                 return ServiceResult.failure(Status.INVALID_Y);
             }
-            if (isTooCloseToExisting(territory.get().id(), baseLocation)) {
+            List<Building> buildings = buildingRepository.listByTerritory(territory.get().id());
+            if (hasBuildingInProgress(buildings)) {
+                return ServiceResult.failure(Status.BUILDING_IN_PROGRESS);
+            }
+            if (!isInsideBuildArea(territory.get(), baseLocation)) {
+                return ServiceResult.failure(Status.INVALID_LOCATION);
+            }
+            if (isTooCloseToExisting(buildings, baseLocation)) {
                 return ServiceResult.failure(Status.TOO_CLOSE);
             }
             BuildingDefinition definition = buildingsConfig.get(type);
@@ -200,9 +207,17 @@ public class BuildingService {
         return Optional.empty();
     }
 
-    private boolean isTooCloseToExisting(long territoryId, Location baseLocation) {
+    private boolean hasBuildingInProgress(List<Building> buildings) {
+        for (Building building : buildings) {
+            if (building.state() == BuildingState.BUILDING) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isTooCloseToExisting(List<Building> buildings, Location baseLocation) {
         int spacing = pluginConfig.buildingMinSpacing();
-        List<Building> buildings = buildingRepository.listByTerritory(territoryId);
         for (Building building : buildings) {
             if (building.state() == BuildingState.DESTROYED) {
                 continue;
@@ -214,6 +229,26 @@ public class BuildingService {
             }
         }
         return false;
+    }
+
+    private boolean isInsideBuildArea(NationTerritory territory, Location baseLocation) {
+        int half = Math.max(0, (pluginConfig.buildingMinSpacing() - 1) / 2);
+        int minX = baseLocation.getBlockX() - half;
+        int maxX = baseLocation.getBlockX() + half;
+        int minZ = baseLocation.getBlockZ() - half;
+        int maxZ = baseLocation.getBlockZ() + half;
+
+        RectArea inner = RectArea.fromCenter(territory.centerX(), territory.centerZ(), territory.size() - 8);
+        if (minX < inner.minX || maxX > inner.maxX || minZ < inner.minZ || maxZ > inner.maxZ) {
+            return false;
+        }
+        int coreMinX = territory.centerX() - 4;
+        int coreMaxX = territory.centerX() + 4;
+        int coreMinZ = territory.centerZ() - 4;
+        int coreMaxZ = territory.centerZ() + 4;
+        boolean xOverlap = minX <= coreMaxX && maxX >= coreMinX;
+        boolean zOverlap = minZ <= coreMaxZ && maxZ >= coreMinZ;
+        return !(xOverlap && zOverlap);
     }
 
     private String normalizeDirection(BlockFace face) {
@@ -235,7 +270,9 @@ public class BuildingService {
         NOT_IN_TERRITORY,
         WALL_NOT_BUILT,
         INVALID_Y,
+        INVALID_LOCATION,
         TOO_CLOSE,
+        BUILDING_IN_PROGRESS,
         LEVEL_TOO_LOW,
         LIMIT_REACHED,
         INVALID_TYPE,
@@ -254,6 +291,23 @@ public class BuildingService {
 
         public boolean isSuccess() {
             return status == Status.SUCCESS;
+        }
+    }
+
+    private record RectArea(int minX, int maxX, int minZ, int maxZ) {
+        static RectArea fromCenter(int centerX, int centerZ, int size) {
+            int half = ((size - 1) / 2) + 1;
+            int minX = centerX - half;
+            int maxX = centerX + half;
+            int minZ = centerZ - half;
+            int maxZ = centerZ + half;
+            return new RectArea(minX, maxX, minZ, maxZ);
+        }
+
+        boolean intersects(int otherMinX, int otherMaxX, int otherMinZ, int otherMaxZ) {
+            boolean xOverlap = minX <= otherMaxX && maxX >= otherMinX;
+            boolean zOverlap = minZ <= otherMaxZ && maxZ >= otherMinZ;
+            return xOverlap && zOverlap;
         }
     }
 }

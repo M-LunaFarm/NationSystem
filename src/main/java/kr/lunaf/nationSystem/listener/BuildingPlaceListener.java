@@ -79,7 +79,9 @@ public class BuildingPlaceListener implements Listener {
                     case NOT_IN_TERRITORY -> messages.send(event.getPlayer(), "error.not-in-territory");
                     case WALL_NOT_BUILT -> messages.send(event.getPlayer(), "error.wall-not-built");
                     case INVALID_Y -> messages.send(event.getPlayer(), "error.invalid-location");
+                    case INVALID_LOCATION -> messages.send(event.getPlayer(), "error.invalid-location");
                     case TOO_CLOSE -> messages.send(event.getPlayer(), "error.build-too-close");
+                    case BUILDING_IN_PROGRESS -> messages.send(event.getPlayer(), "error.build-in-progress");
                     case LEVEL_TOO_LOW -> messages.send(event.getPlayer(), "error.build-level-too-low");
                     case LIMIT_REACHED -> messages.send(event.getPlayer(), "error.build-limit-reached");
                     case INVALID_TYPE -> messages.send(event.getPlayer(), "error.invalid-args");

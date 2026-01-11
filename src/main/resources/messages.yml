@@ -24,6 +24,7 @@ error:
   structure-missing: "&c구조물 파일이 없습니다."
   wall-not-built: "&c성벽이 건설되지 않았습니다."
   build-too-close: "&c다른 건물과 너무 가깝습니다."
+  build-in-progress: "&c이미 다른 건물을 건설 중입니다."
   build-level-too-low: "&c국가 레벨이 낮아 건설할 수 없습니다."
   build-limit-reached: "&c해당 건물은 더 이상 건설할 수 없습니다."
   quest-not-ready: "&c일일 퀘스트가 없습니다. 왕이 먼저 수락해야 합니다."
